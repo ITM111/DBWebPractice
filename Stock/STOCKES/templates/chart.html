@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<div class= "left">
+<figure class="highcharts-figure">
+  <div id="Kospi"></div>
+  <center>
+      <p class="highcharts-description">
+               Fluctuation rate by KOSPI<br><br><br>
+      </p>
+      <div style = "width:300px; height:20px; text-align:center; padding: 7px; font-size:14pt; border:5px solid red;">
+                Correlation : 0.079946
+      </div>
+    </center>
+ 
+</figure>
+</div>
+<style>
+.highcharts-figure, .highcharts-data-table table {
+  min-width: 360px; 
+  max-width: 800px;
+  margin: 1em auto;
+}
+
+.highcharts-data-table table {
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
+}
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
+}
+.highcharts-data-table th {
+  font-weight: 600;
+  padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+  padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}
+ ?>
+    </style>
+<style>
+    div {
+        width: 100%;
+        height: 300px;
+        
+        border: 1px solid #000;
+    }
+    div.left {
+        width: 50%;
+        float: left;
+        box-sizing: border-box;
+    }
+    div.right {
+        width: 50%;
+        float: right;
+        box-sizing: border-box;
+    }
+    </style>
+
+</head>
+<body>
+
+ <script>
+Highcharts.getJSON(
+  "{% url 'chart_data_kospi' %}",
+  function (data) {
+    Highcharts.chart('Kospi', {
+      chart: {
+        zoomType: 'x'
+      },
+      title: {
+        text: 'Flcutation time by time'
+      },
+      subtitle: {
+        text: document.ontouchstart === undefined ?
+          'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+      },
+      xAxis: {
+        type: 'datetime',
+      },
+      yAxis: {
+        title: {
+          text: 'Fluctuation Rate(%)'
+        }
+      },
+      legend: {
+        enabled: false
+      },
+      plotOptions: {
+        area: {
+          fillColor: {
+            linearGradient: {
+              x1: 0,
+              y1: 0,
+              x2: 0,
+              y2: 1
+            },
+            stops: [
+              [0, Highcharts.getOptions().colors[0]],
+              [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+            ]
+          },
+          marker: {
+            radius: 2
+          },
+          lineWidth: 1,
+          states: {
+            hover: {
+              lineWidth: 1
+            }
+          },
+          threshold: null
+        }
+      },
+      series: [{
+        name: 'Fluctation rate(%): ',
+        data: data
+      }]
+    });
+  }
+);
+    </script>
+<div class = "right">
+    <figure class="highcharts-figure">
+          <div id="kosdaq"></div>
+          <center>
+            <p class="highcharts-description">
+               Fluctuation rate by KOSDAQ<br><br><br>
+            </p>
+            <div style = "width:300px; height:20px; text-align:center; padding: 7px; font-size:14pt; border:5px solid red;">
+                      Correlation : 0.107184
+            </div>
+        </center>
+    </figure>
+</div>
+
+<script>
+Highcharts.getJSON(
+  "{% url 'chart_data_kosdaq' %}",
+  function (data) {
+    Highcharts.chart('kosdaq', {
+      chart: {
+        zoomType: 'x'
+      },
+      title: {
+        text: 'Flcutation time by time'
+      },
+      subtitle: {
+        text: document.ontouchstart === undefined ?
+          'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+      },
+      xAxis: {
+        type: 'datetime',
+      },
+      yAxis: {
+        title: {
+          text: 'Fluctuation Rate(%)'
+        }
+      },
+      legend: {
+        enabled: false
+      },
+      plotOptions: {
+        area: {
+          fillColor: {
+            linearGradient: {
+              x1: 0,
+              y1: 0,
+              x2: 0,
+              y2: 1
+            },
+            stops: [
+              [0, Highcharts.getOptions().colors[0]],
+              [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+            ]
+          },
+          marker: {
+            radius: 2
+          },
+          lineWidth: 1,
+          states: {
+            hover: {
+              lineWidth: 1
+            }
+          },
+          threshold: null
+        }
+      },
+      series: [{
+        name: 'Fluctation rate(%): ',
+        data: data
+      }]
+    });
+  }
+);
+</script> 
+    </body>
+    
+</html>

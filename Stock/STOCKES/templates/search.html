@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Information about KOSPI and KOSDAQ</title>
+    </head>
+    <body>
+        <form action="/search" method="GET">
+            날짜<input type="date" name="date">
+            <select name="index">
+                <option>KOSPI</option>
+                <option>KOSDAQ</option>
+            </select>
+            <input type="submit" value="검색">
+        </form>
+        <table>
+            {% for index in indexes %}
+            <tr>
+                <td>{{ index.time|date:"Y-m-d H:i:s" }}&nbsp;&nbsp;</td>
+                <td>{{ index.price }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
